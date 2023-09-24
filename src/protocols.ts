@@ -38,3 +38,16 @@ export type newTicket = {
   enrollmentId: number,
   status: TicketStatus
 }
+
+export type paymentBody = {
+	ticketId: number,
+	cardData: cardData
+}
+
+export type cardData = {
+  issuer: "VISA" | "MASTERCARD",
+  number: number,
+  name: string,
+  expirationDate: Date,
+  cvv: number
+}

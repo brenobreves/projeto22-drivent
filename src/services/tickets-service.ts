@@ -1,7 +1,6 @@
 import { notFoundError } from "@/errors";
 import { newTicket } from "@/protocols";
 import { enrollmentRepository, ticketsRepository } from "@/repositories";
-import { Ticket } from "@prisma/client";
 
 async function getTicketTypes() {
     const ticketTypes = await ticketsRepository.getTicketTypes();
