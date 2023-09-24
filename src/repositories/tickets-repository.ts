@@ -5,4 +5,18 @@ async function getTicketTypes() {
     return ticketTypes
 }
 
-export const ticketsRepository = { getTicketTypes }
+async function getTicketByUser(id:number) {
+    const userTicket = await prisma.ticket.findFirst({
+        where:{
+            Enrollment:{
+                userId: id
+            },
+        },
+        include:{
+            TicketType: true,
+        },
+    })
+    return userTicket
+}
+
+export const ticketsRepository = { getTicketTypes , getTicketByUser}
