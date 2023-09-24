@@ -1,4 +1,5 @@
 import { prisma } from "@/config";
+import { newTicket } from "@/protocols";
 
 async function getTicketTypes() {
     const ticketTypes = await prisma.ticketType.findMany()
@@ -19,4 +20,14 @@ async function getTicketByUser(id:number) {
     return userTicket
 }
 
-export const ticketsRepository = { getTicketTypes , getTicketByUser}
+async function createTicket(newTicket: newTicket) {
+    const create = await prisma.ticket.create({
+        data: newTicket,
+        include:{
+            TicketType:true
+        }
+    })
+    return create
+}
+
+export const ticketsRepository = { getTicketTypes , getTicketByUser, createTicket }

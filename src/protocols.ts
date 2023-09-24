@@ -1,3 +1,5 @@
+import { TicketStatus } from "@prisma/client";
+
 export type ApplicationError = {
   name: string;
   message: string;
@@ -29,4 +31,10 @@ export type CEP = {
 
 export type createTicket = {
   ticketTypeId: number;
+}
+
+export type newTicket = {
+  ticketTypeId: number,
+  enrollmentId: number,
+  status: TicketStatus
 }
