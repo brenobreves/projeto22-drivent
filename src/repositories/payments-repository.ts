@@ -1,4 +1,5 @@
 import { prisma } from "@/config";
+import { newPayment } from "@/protocols";
 
 async function getPaymentsByTicket(ticketId: number) {
     const payment = await prisma.payment.findFirst({
@@ -9,4 +10,11 @@ async function getPaymentsByTicket(ticketId: number) {
     return payment
 }
 
-export const paymentsRepository = { getPaymentsByTicket }
+async function createPayment(paymentData:newPayment) {
+    const create = await prisma.payment.create({
+        data:paymentData
+    })
+    return create
+}
+
+export const paymentsRepository = { getPaymentsByTicket, createPayment }

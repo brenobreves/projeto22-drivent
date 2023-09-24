@@ -36,10 +36,23 @@ async function getTicketById(id:number) {
             id
         },
         include:{
-            Enrollment:true
+            Enrollment:true,
+            TicketType:true
         }
     })
     return ticket  
 }
 
-export const ticketsRepository = { getTicketTypes , getTicketByUser, createTicket, getTicketById }
+async function updatePaid(id:number) {
+    const update = await prisma.ticket.update({
+        where:{
+            id
+        },
+        data:{
+            status:"PAID"
+        }
+    })
+    
+}
+
+export const ticketsRepository = { getTicketTypes , getTicketByUser, createTicket, getTicketById, updatePaid }

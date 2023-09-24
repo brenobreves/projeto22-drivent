@@ -1,4 +1,4 @@
-import { TicketStatus } from "@prisma/client";
+import { Payment, TicketStatus } from "@prisma/client";
 
 export type ApplicationError = {
   name: string;
@@ -34,20 +34,22 @@ export type createTicket = {
 }
 
 export type newTicket = {
-  ticketTypeId: number,
-  enrollmentId: number,
-  status: TicketStatus
+  ticketTypeId: number;
+  enrollmentId: number;
+  status: TicketStatus;
 }
 
 export type paymentBody = {
-	ticketId: number,
-	cardData: cardData
+	ticketId: number;
+	cardData: cardData;
 }
 
 export type cardData = {
-  issuer: "VISA" | "MASTERCARD",
-  number: number,
-  name: string,
-  expirationDate: Date,
-  cvv: number
+  issuer: string;
+  number: string;
+  name: string;
+  expirationDate: string;
+  cvv: string;
 }
+
+export type newPayment = Omit<Payment, "id"| "createdAt" | "updatedAt">

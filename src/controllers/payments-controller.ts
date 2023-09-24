@@ -1,7 +1,7 @@
 import { AuthenticatedRequest } from "@/middlewares";
+import { paymentBody } from "@/protocols";
 import { paymentsService } from "@/services";
 import { Response } from "express";
-import httpStatus from "http-status";
 
 export async function getPayments(req: AuthenticatedRequest, res: Response) {
     const {ticketId} = req.query
@@ -11,5 +11,7 @@ export async function getPayments(req: AuthenticatedRequest, res: Response) {
 }
 
 export async function processPayment(req: AuthenticatedRequest, res: Response) {
-    res.send("Process Payment")
+    const paymentData = req.body as paymentBody
+    const process = await paymentsService.processPayment(paymentData, req.userId)
+    res.send(process)
 }
